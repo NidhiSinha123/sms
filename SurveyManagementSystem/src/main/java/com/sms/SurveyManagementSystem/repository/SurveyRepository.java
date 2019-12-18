@@ -11,7 +11,6 @@ import com.sms.SurveyManagementSystem.dto.Survey;
 
 @Repository
 public interface SurveyRepository extends JpaRepository<Survey,BigInteger> {
-	@Query("FROM Survey WHERE isDeleted=false")
-	public List<Survey> findAllNotDeleted();
+	
 
 }

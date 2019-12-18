@@ -28,7 +28,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 /*
  * Author:  Nidhi
  * Description:DTO
- * Created on: November 11, 2019
+ * Created on: December 13, 2019
  * 
  */
 
@@ -51,9 +51,10 @@ public class Questions {
 	private Set<Options> listOfOptions;
 	
 	@OneToMany(mappedBy="questionId")
-	private Set<Answer> listOfAnswers;
+	private List<Answer> listOfAnswers;
 	
- 	@ManyToOne
+ 	
+	@ManyToOne
 	@JoinColumn(name="survey_id")
 	private Survey survey;
 	
@@ -77,17 +78,17 @@ public class Questions {
 	{
 		
 	}
-
-	
 	public Questions(BigInteger questionId, String questionDescription,
-			String questionType, Set<Options> listOfOptions, Survey survey,
-			boolean isDeleted, String createdBy, Date creationDate,
-			String lastModifiedBy, String lastModifiedDate) {
+			String questionType, Set<Options> listOfOptions,
+			List<Answer> listOfAnswers, Survey survey, boolean isDeleted,
+			String createdBy, Date creationDate, String lastModifiedBy,
+			String lastModifiedDate) {
 		super();
 		this.questionId = questionId;
 		this.questionDescription = questionDescription;
 		this.questionType = questionType;
 		this.listOfOptions = listOfOptions;
+		this.listOfAnswers = listOfAnswers;
 		this.survey = survey;
 		this.isDeleted = isDeleted;
 		this.createdBy = createdBy;
@@ -95,6 +96,9 @@ public class Questions {
 		this.lastModifiedBy = lastModifiedBy;
 		this.lastModifiedDate = lastModifiedDate;
 	}
+
+
+
 
 
 	public BigInteger getQuestionId() {
@@ -179,7 +183,14 @@ public class Questions {
 	public void setListOfOptions(Set<Options> listOfOptions) {
 		this.listOfOptions = listOfOptions;
 	}
+	public List<Answer> getListOfAnswers() {
+		return listOfAnswers;
+	}
 
+
+	public void setListOfAnswers(List<Answer> listOfAnswers) {
+		this.listOfAnswers = listOfAnswers;
+	}
 
 	@Override
 	public int hashCode() {

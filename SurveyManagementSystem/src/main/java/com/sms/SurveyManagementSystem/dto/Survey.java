@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /*
  * Author:  Nidhi
  * Description:DTO
- * Created on: November 11, 2019
+ * Created on: December 13, 2019
  * 
  */
 
@@ -46,6 +46,9 @@ public class Survey {
 	
 	@Column(name="survey_title")
 	private String surveyTitle;
+	
+	@Column(name="enable_survey")
+	private boolean enableSurvey;
 	
 	@Column(name="survey_description")
 	private String surveyDescription;
@@ -77,13 +80,17 @@ public class Survey {
 		
 	}
 
+	
+
 	public Survey(BigInteger surveyId, String surveyTitle,
-			String surveyDescription, List<Questions> listOfQuestions,
-			boolean isDeleted, Set<User> listOfUsers, String createdBy,
-			Date creationDate, String lastModifiedBy, String lastModifiedDate) {
+			boolean enableSurvey, String surveyDescription,
+			List<Questions> listOfQuestions, boolean isDeleted,
+			Set<User> listOfUsers, String createdBy, Date creationDate,
+			String lastModifiedBy, String lastModifiedDate) {
 		super();
 		this.surveyId = surveyId;
 		this.surveyTitle = surveyTitle;
+		this.enableSurvey = enableSurvey;
 		this.surveyDescription = surveyDescription;
 		this.listOfQuestions = listOfQuestions;
 		this.isDeleted = isDeleted;
@@ -93,6 +100,8 @@ public class Survey {
 		this.lastModifiedBy = lastModifiedBy;
 		this.lastModifiedDate = lastModifiedDate;
 	}
+
+
 
 	public BigInteger getSurveyId() {
 		return surveyId;
@@ -174,6 +183,19 @@ public class Survey {
 		this.lastModifiedDate = lastModifiedDate;
 	}
 
+	
+	public boolean isEnableSurvey() {
+		return enableSurvey;
+	}
+
+
+
+	public void setEnableSurvey(boolean enableSurvey) {
+		this.enableSurvey = enableSurvey;
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -182,6 +204,7 @@ public class Survey {
 				+ ((createdBy == null) ? 0 : createdBy.hashCode());
 		result = prime * result
 				+ ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result + (enableSurvey ? 1231 : 1237);
 		result = prime * result + (isDeleted ? 1231 : 1237);
 		result = prime * result
 				+ ((lastModifiedBy == null) ? 0 : lastModifiedBy.hashCode());
@@ -203,6 +226,8 @@ public class Survey {
 		return result;
 	}
 
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -221,6 +246,8 @@ public class Survey {
 			if (other.creationDate != null)
 				return false;
 		} else if (!creationDate.equals(other.creationDate))
+			return false;
+		if (enableSurvey != other.enableSurvey)
 			return false;
 		if (isDeleted != other.isDeleted)
 			return false;
@@ -262,16 +289,20 @@ public class Survey {
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Survey [surveyId=" + surveyId + ", surveyTitle=" + surveyTitle
-				+ ", surveyDescription=" + surveyDescription
-				+ ", listOfQuestions=" + listOfQuestions + ", isDeleted="
-				+ isDeleted + ", listOfUsers=" + listOfUsers + ", createdBy="
-				+ createdBy + ", creationDate=" + creationDate
+				+ ", enableSurvey=" + enableSurvey + ", surveyDescription="
+				+ surveyDescription + ", listOfQuestions=" + listOfQuestions
+				+ ", isDeleted=" + isDeleted + ", listOfUsers=" + listOfUsers
+				+ ", createdBy=" + createdBy + ", creationDate=" + creationDate
 				+ ", lastModifiedBy=" + lastModifiedBy + ", lastModifiedDate="
 				+ lastModifiedDate + "]";
 	}
+
+
 	
 
 	

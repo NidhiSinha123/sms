@@ -29,18 +29,25 @@ public class Options {
 	@JoinColumn(name="answer_id")
 	private Answer answer;
 	
+	@Column(name="is_deleted")
+	private boolean isDeleted;
+	
 	public Options()
 	{
 		
 	}
 
 	public Options(BigInteger optionId, String optionDescription,
-			Questions questionId) {
+			Questions questions, Answer answer, boolean isDeleted) {
 		super();
 		this.optionId = optionId;
 		this.optionDescription = optionDescription;
-		this.questions= questions;
+		this.questions = questions;
+		this.answer = answer;
+		this.isDeleted = isDeleted;
 	}
+
+
 
 	public BigInteger getOptionId() {
 		return optionId;
@@ -73,12 +80,21 @@ public class Options {
 	public void setAnswer(Answer answer) {
 		this.answer = answer;
 	}
+	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((answer == null) ? 0 : answer.hashCode());
+		result = prime * result + (isDeleted ? 1231 : 1237);
 		result = prime
 				* result
 				+ ((optionDescription == null) ? 0 : optionDescription
@@ -104,6 +120,8 @@ public class Options {
 				return false;
 		} else if (!answer.equals(other.answer))
 			return false;
+		if (isDeleted != other.isDeleted)
+			return false;
 		if (optionDescription == null) {
 			if (other.optionDescription != null)
 				return false;
@@ -126,10 +144,8 @@ public class Options {
 	public String toString() {
 		return "Options [optionId=" + optionId + ", optionDescription="
 				+ optionDescription + ", questions=" + questions + ", answer="
-				+ answer + "]";
+				+ answer + ", isDeleted=" + isDeleted + "]";
 	}
-
-	
 
 
 }
