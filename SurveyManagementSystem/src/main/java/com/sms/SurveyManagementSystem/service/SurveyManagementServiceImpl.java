@@ -361,9 +361,6 @@ public class SurveyManagementServiceImpl implements SurveyManagementService{
 		{
 			Set<Survey> listOfSurvey = user.getAssignedSurvey();
 			listOfSurvey.add(survey);
-			AssignSurvey assignSurvey =new AssignSurvey();
-			
-			
 			return true;
 		}
 		else

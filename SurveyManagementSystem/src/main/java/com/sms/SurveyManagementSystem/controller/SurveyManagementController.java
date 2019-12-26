@@ -38,6 +38,7 @@ import com.sms.SurveyManagementSystem.service.SurveyManagementService;
  * 
  */
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class SurveyManagementController {
 
 	@Autowired
@@ -97,7 +98,7 @@ public class SurveyManagementController {
 	}
 	
 	@PutMapping(value="/updateSurvey")
-	public ResponseEntity<?> updateSurvey(@RequestParam("surveyId") String id,@ModelAttribute Survey survey) throws UserException
+	public ResponseEntity<?> updateSurvey(@RequestParam("surveyId") String id,@RequestBody Survey survey) throws UserException
 	{
 		BigInteger surveyId = service.validateSurveyId(id);
 		if(surveyId!=null && survey!=null)
